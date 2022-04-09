@@ -131,11 +131,31 @@ label ask_be_girlfriend_label(the_person):
             the_person "I... I don't know what to say [the_person.mc_title]. I love you like you were my own, but we could never have a real relationship together."
             the_person "Could you imagine what your mother would say about that, dating her sister? She would go crazy!"
             the_person "Come on, let's talk about something else."
+            if the_person.event_triggers_dict.get("preg_your_kids_known",0) > 0 and persistent.pregnancy_pref > 0:
+                "You turn to leave and she grabs you by the arm."
+                the_person "Umm, wait a sec, you know what we have is not normal, but who cares right?"
+                "She puts her arms around you and pulls you close."
+                $ mc.change_locked_clarity(10)
+                "She kisses you, and you kiss her back just as happily."
+                $ the_person.add_role(aunt_girlfriend_role)
+            else:
+                the_person "now if I was pregnant with your kiddo, I might have to reconsider this."
 
         elif the_person.has_role(cousin_role):
             the_person "You and me being, like, boyfriend and girlfriend? Ha, you must be crazy! Have you been huffing fumes at work?"
             the_person "I mean sure, I've come around on you and think you're not a total loser now, but we're cousins. Our parents would kill us."
             the_person "So yeah, that's going to be a no from me."
+            if the_person.event_triggers_dict.get("preg_your_kids_known",0) > 0 and persistent.pregnancy_pref > 0:
+                "You turn to leave and she grabs you by the arm."
+                the_person "Umm, wait a sec, you know I'm a rebel."
+                "She puts her arms around you and pulls you close."
+                $ mc.change_locked_clarity(10)
+                "She kisses you, and you kiss her back just as happily."
+                $ the_person.add_role(cousin_girlfriend_role)
+                the_person "Wonder if I can tempt you to give me a cream filling?"
+                $ mc.change_locked_clarity(10)
+            else:
+                the_person "It is not like you knocked me up or anything, so its all fun and games from here."
 
         elif the_person.relationship != "Single":
             $ so_title = SO_relationship_to_title(the_person.relationship)
